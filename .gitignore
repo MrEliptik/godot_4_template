@@ -1,0 +1,7 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+build/*
+
+# Exclude specific files and directories
+!build/export.py
