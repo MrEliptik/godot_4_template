@@ -16,7 +16,8 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - Get a random position inside constraints⌛ 
 - Spawn evenly inside area ⌛
 - Time related stuff (global time, slow down, etc) ⌛
-- Call later function ⌛
+- Call function later ✅
+- Call function in X frames⌛
 
 ### Autoload
 
@@ -24,7 +25,7 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - **Utils** → Functions and utilities that can be used by many objects (computing area, getting a random value, etc..) ⌛
 - **AudioManager** → manages music playing, effects on bus and playing shared sound effects ⌛
 - **SceneSwitcher** → Allows to transition between scenes that are often used (titlescreen, options, level select, etc) ⌛
-- **Transition** → A transition screen to hide loading ⌛
+- **Transition** → A transition screen to hide loading ✅
 - **Achievements** → a layer to keep track of achievements. Allows to more easily plug other achievement system and also show achievements on platforms where there's no system like itch ⌛
 
 ### **Components**
