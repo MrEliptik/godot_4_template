@@ -1,0 +1,1 @@
+This is my personal Godot 4 template to make quick prototype, game jams and quickstart my new projects. You're free to use it as is or take parts that you may find intersting! See [LICENSE.md]() fore more details
