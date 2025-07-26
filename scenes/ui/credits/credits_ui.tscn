@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://tdl04hhrvyxt"]
+
+[ext_resource type="Script" uid="uid://rqy0jk5mkqf3" path="res://scenes/ui/credits/scripts/credits_ui.gd" id="1_v4stj"]
+[ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_wk7rk"]
+
+[node name="CreditsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v4stj")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = 43.0
+offset_right = 151.0
+offset_bottom = 156.0
+grow_horizontal = 2
+text = "CREDITS"
+label_settings = ExtResource("2_wk7rk")
+horizontal_alignment = 1
+vertical_alignment = 1

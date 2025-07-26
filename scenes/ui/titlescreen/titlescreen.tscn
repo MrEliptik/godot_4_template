@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://by16yq6ijbw77"]
+
+[ext_resource type="Script" uid="uid://in1ex86yvf8q" path="res://scenes/ui/titlescreen/scripts/titlescreen.gd" id="1_1f06u"]
+[ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_ii2re"]
+[ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_7nou0"]
+
+[node name="Titlescreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1f06u")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = 43.0
+offset_right = 151.0
+offset_bottom = 156.0
+grow_horizontal = 2
+text = "TITLE"
+label_settings = ExtResource("2_ii2re")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -329.0
+offset_right = 308.0
+offset_bottom = -43.0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="BtnStart" parent="Buttons" instance=ExtResource("3_7nou0")]
+layout_mode = 2
+text = "START"
+
+[node name="BtnSettings" parent="Buttons" instance=ExtResource("3_7nou0")]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="BtnCredits" parent="Buttons" instance=ExtResource("3_7nou0")]
+layout_mode = 2
+text = "CREDITS"
+
+[node name="BtnQuit" parent="Buttons" instance=ExtResource("3_7nou0")]
+layout_mode = 2
+text = "QUIT"
+
+[connection signal="pressed" from="Buttons/BtnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="Buttons/BtnSettings" to="." method="_on_btn_settings_pressed"]
+[connection signal="pressed" from="Buttons/BtnCredits" to="." method="_on_btn_credits_pressed"]
+[connection signal="pressed" from="Buttons/BtnQuit" to="." method="_on_btn_quit_pressed"]

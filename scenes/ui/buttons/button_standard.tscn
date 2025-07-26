@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkx0tjw21t4ql"]
+
+[ext_resource type="Script" uid="uid://b7pdidwj7qtps" path="res://scenes/ui/buttons/scripts/button_standard.gd" id="1_ibneu"]
+
+[node name="ButtonStandard" type="Button"]
+custom_minimum_size = Vector2(192, 64)
+offset_right = 192.0
+offset_bottom = 64.0
+text = "BUTTON"
+script = ExtResource("1_ibneu")

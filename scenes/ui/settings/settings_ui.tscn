@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://pgqdboytwk1b"]
+
+[ext_resource type="Script" uid="uid://20n2essy7t3a" path="res://scenes/ui/settings/scripts/settings_ui.gd" id="1_6oxt2"]
+[ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_6xy4m"]
+
+[node name="SettingsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6oxt2")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = 43.0
+offset_right = 151.0
+offset_bottom = 156.0
+grow_horizontal = 2
+text = "SETTINGS"
+label_settings = ExtResource("2_6xy4m")
+horizontal_alignment = 1
+vertical_alignment = 1
