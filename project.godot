@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="godot_4_template"
+run/main_scene="uid://by16yq6ijbw77"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Globals="*res://autoload/globals/globals.gd"
+SettingsManager="*res://autoload/settings_manager/settings_manager.gd"
 SignalBus="*res://autoload/signal_bus/signal_bus.gd"
+SceneSwitcher="*res://autoload/scene_switcher/scene_switcher.tscn"
+AudioManager="*res://autoload/audio_manager/audio_manager.tscn"
 Utils="*res://autoload/utils/utils.gd"
 Transition="*res://autoload/transition/transition.tscn"
 
@@ -34,6 +38,7 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://autoload/": "orange",
 "res://components/": "gray",
+"res://scenes/": "blue",
 "res://scenes/ui/": "teal",
 "res://shared/": "purple"
 }
