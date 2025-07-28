@@ -32,7 +32,7 @@ func switch_to(scene: int, use_transition: bool = true, params=null) -> void:
 	if use_transition:
 		Transition.hide_transition()
 
-func instance_scene(scene: int) -> Node:
+func instance_scene(scene: int, data: Dictionary = {}) -> Node:
 	var instance = null
 	match scene:
 		SCENE.TITLE:
@@ -43,6 +43,8 @@ func instance_scene(scene: int) -> Node:
 			instance = settings.instance()
 		SCENE.GAME:
 			instance = game.instance()
+		
+	instance.set_meta("data", data)
 	
 	return instance
 
