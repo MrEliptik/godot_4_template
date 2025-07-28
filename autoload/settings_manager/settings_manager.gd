@@ -1,59 +1,73 @@
 extends Node
 
-enum {GENERAL=1, VIDEO=2, SOUND=3, GAMEPLAY=4}
-enum {LANGUAGE=11, LANGUAGE_SET=12, WINDOW_TYPE=13, MONITOR=14, VSYNC=15, MASTER_VOLUME=16, MASTER_TOGGLE=17,
+enum CATEGORY {GENERAL=1, VIDEO=2, SOUND=3, GAMEPLAY=4}
+enum SETTING {LANGUAGE=11, LANGUAGE_SET=12, WINDOW_TYPE=13, MONITOR=14, VSYNC=15, MASTER_VOLUME=16, MASTER_TOGGLE=17,
 	MUSIC_VOLUME=18, MUSIC_TOGGLE=19, EFFECTS_VOLUME=20, EFFECTS_TOGGLE=21, SCREENSHAKE=22, VIBRATION=23,
 	}
-enum DISPLAY {FULLSCREEN=50, WINDOWED=51}
-enum STRENGTH {DISABLED=60, LOW=61, NORMAL=62}
+enum DISPLAY {FULLSCREEN, FULLSCREEN_BORDERLESS, WINDOWED}
+enum STRENGTH {DISABLED, LOW, NORMAL}
+enum VSYNC {DISABLE, ENABLE, ADAPTIVE}
 
 const SAVE_PATH = "user://settings.cfg"
 var config_file = ConfigFile.new()
 
-var setting_to_str: Dictionary = {
-	GENERAL: "GENERAL",
-	VIDEO: "VIDEO",
-	SOUND: "SOUND",
-	GAMEPLAY: "GAMEPLAY",
-	LANGUAGE: "LANGUAGE",
-	LANGUAGE_SET: "LANGUAGE_SET",
-	WINDOW_TYPE: "WINDOW_TYPE",
-	MONITOR: "MONITOR",
-	VSYNC: "VSYNC",
-	MASTER_VOLUME: "MASTER_VOLUME",
-	MASTER_TOGGLE: "MASTER_TOGGLE",
-	MUSIC_VOLUME: "MUSIC_VOLUME",
-	MUSIC_TOGGLE: "MUSIC_TOGGLE",
-	EFFECTS_VOLUME: "EFFECTS_VOLUME",
-	EFFECTS_TOGGLE: "EFFECTS_TOGGLE",
-	SCREENSHAKE: "SCREENSHAKE",
-	VIBRATION: "VIBRATION",
-}
-
 var settings_default = {
-	GENERAL: {
-		LANGUAGE:"en",
-		LANGUAGE_SET:false,
+	CATEGORY.GENERAL: {
+		SETTING.LANGUAGE:"en",
+		SETTING.LANGUAGE_SET:false,
 	},
-	VIDEO: {
-		WINDOW_TYPE: DISPLAY.WINDOWED,
-		MONITOR: DisplayServer.window_get_current_screen(),
-		VSYNC: DisplayServer.VSYNC_ENABLED
+	CATEGORY.VIDEO: {
+		SETTING.WINDOW_TYPE: DISPLAY.WINDOWED,
+		SETTING.MONITOR: DisplayServer.window_get_current_screen(),
+		SETTING.VSYNC: DisplayServer.VSYNC_ENABLED
 	},
-	SOUND: {
-		MASTER_VOLUME: 60,
-		MASTER_TOGGLE: true,
-		MUSIC_VOLUME: 100,
-		MUSIC_TOGGLE: true,
-		EFFECTS_VOLUME: 100,
-		EFFECTS_TOGGLE: true
+	CATEGORY.SOUND: {
+		SETTING.MASTER_VOLUME: 60,
+		SETTING.MASTER_TOGGLE: true,
+		SETTING.MUSIC_VOLUME: 100,
+		SETTING.MUSIC_TOGGLE: true,
+		SETTING.EFFECTS_VOLUME: 100,
+		SETTING.EFFECTS_TOGGLE: true
 	},
-	GAMEPLAY: {
-		SCREENSHAKE: STRENGTH.NORMAL,
-		VIBRATION: STRENGTH.NORMAL,
+	CATEGORY.GAMEPLAY: {
+		SETTING.SCREENSHAKE: STRENGTH.NORMAL,
+		SETTING.VIBRATION: STRENGTH.NORMAL,
 	}
 }
 
+var category_to_str: Dictionary = {
+	CATEGORY.GENERAL: "GENERAL",
+	CATEGORY.VIDEO: "VIDEO",
+	CATEGORY.SOUND: "SOUND",
+	CATEGORY.GAMEPLAY: "GAMEPLAY",
+}
+	
+var setting_to_str: Dictionary = {
+	SETTING.LANGUAGE: "LANGUAGE",
+	SETTING.LANGUAGE_SET: "LANGUAGE_SET",
+	SETTING.WINDOW_TYPE: "WINDOW_TYPE",
+	SETTING.MONITOR: "MONITOR",
+	SETTING.VSYNC: "VSYNC",
+	SETTING.MASTER_VOLUME: "MASTER_VOLUME",
+	SETTING.MASTER_TOGGLE: "MASTER_TOGGLE",
+	SETTING.MUSIC_VOLUME: "MUSIC_VOLUME",
+	SETTING.MUSIC_TOGGLE: "MUSIC_TOGGLE",
+	SETTING.EFFECTS_VOLUME: "EFFECTS_VOLUME",
+	SETTING.EFFECTS_TOGGLE: "EFFECTS_TOGGLE",
+	SETTING.SCREENSHAKE: "SCREENSHAKE",
+	SETTING.VIBRATION: "VIBRATION",
+}
+var display_to_str: Dictionary = {
+	DISPLAY.FULLSCREEN: "Fullscreen",
+	DISPLAY.FULLSCREEN_BORDERLESS: "Bordless fullscreen",
+	DISPLAY.WINDOWED: "Windowed",
+}
+
+var strength_to_sr: Dictionary = {
+	STRENGTH.DISABLED: "Disabled",
+	STRENGTH.LOW: "Low",
+	STRENGTH.NORMAL: "Normal",
+}
 
 var steam_lang_str_to_code = {
 	"english": "en",
@@ -111,46 +125,46 @@ func load_settings() -> Dictionary:
 		for key in settings[section].keys():
 			# Default value
 			var val = settings[section][key]
-			settings[section][key] = config_file.get_value(setting_to_str[section], setting_to_str[key], val)
+			settings[section][key] = config_file.get_value(category_to_str[section], setting_to_str[key], val)
 #			print("%s: %s" % [key, val])
 	return settings
 	
 func write_settings() -> void:
 	for section in settings.keys():
 		for key in settings[section].keys():
-			config_file.set_value(setting_to_str[section], setting_to_str[key], settings[section][key])
+			config_file.set_value(category_to_str[section], setting_to_str[key], settings[section][key])
 			
 	config_file.save(SAVE_PATH)
 
 func grab_settings():
 	## VIDEO
-	settings[VIDEO][VSYNC] = DisplayServer.window_get_vsync_mode()
+	settings[CATEGORY.VIDEO][SETTING.VSYNC] = DisplayServer.window_get_vsync_mode()
 	
-	settings[VIDEO][WINDOW_TYPE] = DISPLAY.FULLSCREEN
+	settings[CATEGORY.VIDEO][SETTING.WINDOW_TYPE] = DISPLAY.FULLSCREEN
 		
-	settings[VIDEO][MONITOR] = DisplayServer.window_get_current_screen()
+	settings[CATEGORY.VIDEO][SETTING.MONITOR] = DisplayServer.window_get_current_screen()
 	
 	## SOUND
-	settings[SOUND][MASTER_VOLUME] = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Master")) * 100.0
-	settings[SOUND][MASTER_TOGGLE] = AudioServer.is_bus_mute(AudioServer.get_bus_index("Master"))
-	settings[SOUND][MUSIC_VOLUME] = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Music")) * 100.0
-	settings[SOUND][MUSIC_TOGGLE] = AudioServer.is_bus_mute(AudioServer.get_bus_index("Music"))
-	settings[SOUND][EFFECTS_VOLUME] = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("SFX")) * 100.0
-	settings[SOUND][EFFECTS_TOGGLE] = AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX"))
+	settings[CATEGORY.SOUND][SETTING.MASTER_VOLUME] = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Master")) * 100.0
+	settings[CATEGORY.SOUND][SETTING.MASTER_TOGGLE] = AudioServer.is_bus_mute(AudioServer.get_bus_index("Master"))
+	settings[CATEGORY.SOUND][SETTING.MUSIC_VOLUME] = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Music")) * 100.0
+	settings[CATEGORY.SOUND][SETTING.MUSIC_TOGGLE] = AudioServer.is_bus_mute(AudioServer.get_bus_index("Music"))
+	settings[CATEGORY.SOUND][SETTING.EFFECTS_VOLUME] = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("SFX")) * 100.0
+	settings[CATEGORY.SOUND][SETTING.EFFECTS_TOGGLE] = AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX"))
 	
 func apply_settings(values: Dictionary):
-	TranslationServer.set_locale(settings[GENERAL][LANGUAGE])
+	TranslationServer.set_locale(settings[CATEGORY.GENERAL][SETTING.LANGUAGE])
 	
 	##### Video #####
-	DisplayServer.window_set_current_screen(values[VIDEO][MONITOR])
+	DisplayServer.window_set_current_screen(values[CATEGORY.VIDEO][SETTING.MONITOR])
 
 	## Window type
-	DisplayServer.window_set_mode(values[VIDEO][WINDOW_TYPE])
+	DisplayServer.window_set_mode(values[CATEGORY.VIDEO][SETTING.WINDOW_TYPE])
 
 	get_window().move_to_center()
 
 #	## VSYNC
-	DisplayServer.window_set_vsync_mode(values[VIDEO][VSYNC])
+	DisplayServer.window_set_vsync_mode(values[CATEGORY.VIDEO][SETTING.VSYNC])
 	
 #	## MSAA
 #	get_viewport().msaa = Globals.msaa[values["video"]["msaa"]]
@@ -159,11 +173,11 @@ func apply_settings(values: Dictionary):
 
 #	##### AUDIO ####
 #	## General
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), values[SOUND][MASTER_VOLUME]/100.0)
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), values[SOUND][MASTER_TOGGLE])
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), values[CATEGORY.SOUND][SETTING.MASTER_VOLUME]/100.0)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), values[CATEGORY.SOUND][SETTING.MASTER_TOGGLE])
 #	## Music
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), values[SOUND][MUSIC_VOLUME]/100.0)
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), values[SOUND][MUSIC_TOGGLE])
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), values[CATEGORY.SOUND][SETTING.MUSIC_VOLUME]/100.0)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), values[CATEGORY.SOUND][SETTING.MUSIC_TOGGLE])
 #	## SFX
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), values[SOUND][EFFECTS_VOLUME]/100.0)
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), values[SOUND][EFFECTS_TOGGLE])
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), values[CATEGORY.SOUND][SETTING.EFFECTS_VOLUME]/100.0)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), values[CATEGORY.SOUND][SETTING.EFFECTS_TOGGLE])
