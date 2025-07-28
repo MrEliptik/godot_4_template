@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://pgqdboytwk1b"]
+[gd_scene load_steps=5 format=3 uid="uid://pgqdboytwk1b"]
 
 [ext_resource type="Script" uid="uid://20n2essy7t3a" path="res://scenes/ui/settings/scripts/settings_ui.gd" id="1_6oxt2"]
 [ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_6xy4m"]
 [ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_dmrhn"]
+[ext_resource type="LabelSettings" uid="uid://cpc02d4oge46v" path="res://shared/fonts/label_26.tres" id="3_ejmdu"]
 
 [node name="SettingsUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +29,150 @@ text = "SETTINGS"
 label_settings = ExtResource("2_6xy4m")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Settings" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.307
+anchor_top = 0.171
+anchor_right = 0.693
+anchor_bottom = 0.905
+offset_left = -0.440002
+offset_top = 0.319992
+offset_right = 0.439941
+offset_bottom = -0.400024
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "LANGUAGE"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="VSeparator" type="VSeparator" parent="Settings"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "WINDOW"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer3"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "MONITOR"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer4"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "VSYNC"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer4"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="VSeparator2" type="VSeparator" parent="Settings"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer5"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "GENERAL"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer5"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+
+[node name="Value" type="Label" parent="Settings/HBoxContainer5"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("3_ejmdu")
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Settings/HBoxContainer5"]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="Settings"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer6"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "SCREENSHAKE"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer6"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+tick_count = 3
+ticks_on_borders = true
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer7"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "GAMEPAD VIBRATION"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer7"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+tick_count = 3
+ticks_on_borders = true
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1

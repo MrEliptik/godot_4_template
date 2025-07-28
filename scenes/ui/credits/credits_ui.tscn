@@ -3,9 +3,7 @@
 [ext_resource type="Script" uid="uid://rqy0jk5mkqf3" path="res://scenes/ui/credits/scripts/credits_ui.gd" id="1_v4stj"]
 [ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_wk7rk"]
 [ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_ugl0o"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ugl0o"]
-font_size = 26
+[ext_resource type="LabelSettings" uid="uid://cpc02d4oge46v" path="res://shared/fonts/label_26.tres" id="4_hlwqi"]
 
 [node name="CreditsUI" type="Control"]
 layout_mode = 3
@@ -67,7 +65,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Developer"
-label_settings = SubResource("LabelSettings_ugl0o")
+label_settings = ExtResource("4_hlwqi")
 vertical_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]

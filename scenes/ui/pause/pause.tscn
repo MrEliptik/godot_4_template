@@ -1,12 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6hjp6l1casac"]
+[gd_scene load_steps=4 format=3 uid="uid://c6hjp6l1casac"]
 
 [ext_resource type="Script" uid="uid://bm1pt4bhot5n3" path="res://scenes/ui/pause/scripts/pause.gd" id="1_p8xvd"]
+[ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_1lama"]
+[ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_0oakk"]
 
 [node name="PauseUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_p8xvd")
+
+[node name="Dark" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00392157, 0.00392157, 0.00392157, 0.294118)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = 43.0
+offset_right = 151.0
+offset_bottom = 156.0
+grow_horizontal = 2
+text = "PAUSE"
+label_settings = ExtResource("2_1lama")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -255.0
+offset_right = 308.0
+offset_bottom = -43.0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="BtnContinue" parent="Buttons" instance=ExtResource("3_0oakk")]
+layout_mode = 2
+text = "CONTINUE
+"
+
+[node name="BtnSettings" parent="Buttons" instance=ExtResource("3_0oakk")]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="BtnHome" parent="Buttons" instance=ExtResource("3_0oakk")]
+layout_mode = 2
+text = "HOME"
+
+[node name="Scene" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Buttons/BtnContinue" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="Buttons/BtnSettings" to="." method="_on_btn_settings_pressed"]
+[connection signal="pressed" from="Buttons/BtnHome" to="." method="_on_btn_home_pressed"]
