@@ -1,14 +1,35 @@
 extends Node
 
-enum {GENERAL, VIDEO, SOUND, GAMEPLAY}
-enum {LANGUAGE, LANGUAGE_SET, WINDOW_TYPE, MONITOR, VSYNC, MASTER_VOLUME, MASTER_TOGGLE,
-	MUSIC_VOLUME, MUSIC_TOGGLE, EFFECTS_VOLUME, EFFECTS_TOGGLE, LIVES, SCREENSHAKE, VIBRATION,
+enum {GENERAL=1, VIDEO=2, SOUND=3, GAMEPLAY=4}
+enum {LANGUAGE=11, LANGUAGE_SET=12, WINDOW_TYPE=13, MONITOR=14, VSYNC=15, MASTER_VOLUME=16, MASTER_TOGGLE=17,
+	MUSIC_VOLUME=18, MUSIC_TOGGLE=19, EFFECTS_VOLUME=20, EFFECTS_TOGGLE=21, SCREENSHAKE=22, VIBRATION=23,
 	}
-enum DISPLAY {FULLSCREEN, WINDOWED}
-enum STRENGTH {DISABLED, LOW, NORMAL}
+enum DISPLAY {FULLSCREEN=50, WINDOWED=51}
+enum STRENGTH {DISABLED=60, LOW=61, NORMAL=62}
 
 const SAVE_PATH = "user://settings.cfg"
 var config_file = ConfigFile.new()
+
+var setting_to_str: Dictionary = {
+	GENERAL: "GENERAL",
+	VIDEO: "VIDEO",
+	SOUND: "SOUND",
+	GAMEPLAY: "GAMEPLAY",
+	LANGUAGE: "LANGUAGE",
+	LANGUAGE_SET: "LANGUAGE_SET",
+	WINDOW_TYPE: "WINDOW_TYPE",
+	MONITOR: "MONITOR",
+	VSYNC: "VSYNC",
+	MASTER_VOLUME: "MASTER_VOLUME",
+	MASTER_TOGGLE: "MASTER_TOGGLE",
+	MUSIC_VOLUME: "MUSIC_VOLUME",
+	MUSIC_TOGGLE: "MUSIC_TOGGLE",
+	EFFECTS_VOLUME: "EFFECTS_VOLUME",
+	EFFECTS_TOGGLE: "EFFECTS_TOGGLE",
+	SCREENSHAKE: "SCREENSHAKE",
+	VIBRATION: "VIBRATION",
+}
+
 var settings_default = {
 	GENERAL: {
 		LANGUAGE:"en",
@@ -70,8 +91,8 @@ var should_apply_values: bool = true
 func _ready() -> void:
 	## Create save file if not existing
 	## otherwise, load values
-	var file_check = FileDialog.new()
-	if file_check.file_exists(SAVE_PATH):
+	print(ProjectSettings.globalize_path(SAVE_PATH))
+	if FileAccess.file_exists(SAVE_PATH):
 		settings = load_settings()
 		apply_settings(settings)
 		# Write again to make sure to save new values if I added it after the file was created
@@ -90,14 +111,14 @@ func load_settings() -> Dictionary:
 		for key in settings[section].keys():
 			# Default value
 			var val = settings[section][key]
-			settings[section][key] = config_file.get_value(section, key, val)
+			settings[section][key] = config_file.get_value(setting_to_str[section], setting_to_str[key], val)
 #			print("%s: %s" % [key, val])
 	return settings
 	
 func write_settings() -> void:
 	for section in settings.keys():
 		for key in settings[section].keys():
-			config_file.set_value(section, key, settings[section][key])
+			config_file.set_value(setting_to_str[section], setting_to_str[key], settings[section][key])
 			
 	config_file.save(SAVE_PATH)
 
