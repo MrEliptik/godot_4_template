@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://pgqdboytwk1b"]
+[gd_scene load_steps=4 format=3 uid="uid://pgqdboytwk1b"]
 
 [ext_resource type="Script" uid="uid://20n2essy7t3a" path="res://scenes/ui/settings/scripts/settings_ui.gd" id="1_6oxt2"]
 [ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_6xy4m"]
+[ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_dmrhn"]
 
 [node name="SettingsUI" type="Control"]
 layout_mode = 3
@@ -26,3 +27,21 @@ text = "SETTINGS"
 label_settings = ExtResource("2_6xy4m")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -107.0
+offset_right = 308.0
+offset_bottom = -43.0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="BtnHome" parent="Buttons" instance=ExtResource("3_dmrhn")]
+layout_mode = 2
+text = "HOME"
+
+[connection signal="pressed" from="Buttons/BtnHome" to="." method="_on_btn_home_pressed"]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://tdl04hhrvyxt"]
+[gd_scene load_steps=5 format=3 uid="uid://tdl04hhrvyxt"]
 
 [ext_resource type="Script" uid="uid://rqy0jk5mkqf3" path="res://scenes/ui/credits/scripts/credits_ui.gd" id="1_v4stj"]
 [ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_wk7rk"]
+[ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_ugl0o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ugl0o"]
+font_size = 26
 
 [node name="CreditsUI" type="Control"]
 layout_mode = 3
@@ -26,3 +30,57 @@ text = "CREDITS"
 label_settings = ExtResource("2_wk7rk")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -107.0
+offset_right = 308.0
+offset_bottom = -43.0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="BtnHome" parent="Buttons" instance=ExtResource("3_ugl0o")]
+layout_mode = 2
+text = "HOME"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36
+anchor_top = 0.198
+anchor_right = 0.64
+anchor_bottom = 0.834
+offset_left = 0.799988
+offset_top = 0.159988
+offset_right = -0.800049
+offset_bottom = 0.279968
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Developer"
+label_settings = SubResource("LabelSettings_ugl0o")
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[url=https://mreliptik.itch.io/]MrEliptik[/url]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="Buttons/BtnHome" to="." method="_on_btn_home_pressed"]
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

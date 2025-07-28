@@ -11,7 +11,7 @@ var _params = null
 
 func switch_to(scene: int, use_transition: bool = true, params=null) -> void:
 	if use_transition:
-		Transition.appear()
+		Transition.show_transition()
 		await Transition.transition_in_finished
 		
 	_params = params
@@ -27,10 +27,10 @@ func switch_to(scene: int, use_transition: bool = true, params=null) -> void:
 		SCENE.GAME:
 			to_load = game
 			
-	get_tree().change_scene_to(to_load)
+	get_tree().change_scene_to_packed(to_load)
 	
 	if use_transition:
-		Transition.disappear()
+		Transition.hide_transition()
 
 func instance_scene(scene: int) -> Node:
 	var instance = null
