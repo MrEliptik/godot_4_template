@@ -12,6 +12,7 @@ config_version=5
 
 config/name="godot_4_template"
 run/main_scene="uid://by16yq6ijbw77"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
