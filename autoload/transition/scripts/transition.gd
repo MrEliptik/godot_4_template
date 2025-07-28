@@ -13,14 +13,14 @@ func _ready() -> void:
 
 func show_transition() -> void:
 	if shown: return
-	circle.material.set_shader_param("screen_width", circle.size.x)
-	circle.material.set_shader_param("screen_height", circle.size.y)
+	circle.material.set_shader_parameter("screen_width", circle.size.x)
+	circle.material.set_shader_parameter("screen_height", circle.size.y)
 	shown = true
 	animation_player.play("show")
 	
 func hide_transition() -> void:
 	if not shown: return
-	circle.material.set_shader_param("screen_width", circle.size.x)
-	circle.material.set_shader_param("screen_height", circle.size.y)
+	circle.material.set_shader_parameter("screen_width", circle.size.x)
+	circle.material.set_shader_parameter("screen_height", circle.size.y)
 	shown = false
 	animation_player.play("hide")
