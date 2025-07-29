@@ -23,13 +23,13 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 
 **Game**
 - `exit_game()` → function to exit the game, where you can show a message if needed
-- `has_autoload`
-- `has_autoload_signal`
+- `has_autoload` ✅
+- `has_autoload_signal` ✅
 
 **Transforms, points, area**
 - `get_random_rotation` → you provide the deviation and if you want + - sign ✅
-- `get_random_rotation_deg` → same as `get_random_rotation`, in degrees
-- `get_random_point` → random point in a circle (non uniform distribution)
+- `get_random_rotation_deg` → same as `get_random_rotation`, in degrees ✅
+- `get_random_point` → random point in a circle (non uniform distribution) ✅
 - Get a random position inside constraints⌛ 
 - Spawn evenly inside area ⌛
 - Time related stuff (global time, slow down, etc) ⌛
