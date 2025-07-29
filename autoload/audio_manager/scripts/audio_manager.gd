@@ -51,7 +51,7 @@ func death_music_effect() -> void:
 	tween_damage.tween_property(active_player, "pitch_scale", 0.7, 0.3)
 	tween_damage.tween_property(active_player, "volume_db", prev_db-13.0, 0.3)
 	tween_damage.chain().tween_interval(0.35)
-	tween_damage.tween_property(active_player, "pitch_scale", 1.0, 0.5)
+	tween_damage.tween_property(active_player, "pitch_scale", 1.0, 0.5) 
 	tween_damage.tween_property(active_player, "volume_db", prev_db, 0.5)
 	tween_damage.tween_callback(AudioManager.set_muffle_music.bind(true))
 

@@ -45,7 +45,7 @@ func get_closest_safe_point_in_polygon(polygon: Polygon2D, p: Vector2, safe_offs
 		return level_polygon.to_global(local_p)
 	
 	# If not, move the point towards the center
-	var dir: Vector2 = (calculate_polygon_center(polygon.polygon) - local_p).normalized()
+	var dir: Vector2 = (compute_polygon_center(polygon.polygon) - local_p).normalized()
 	
 	# Move towards the center in 10 increments until point is safe again
 	local_p += dir * 10
@@ -85,7 +85,7 @@ func compute_bounding_box(points: PackedVector2Array) -> Array:
 	
 	return bbox
 
-func compute_polygons(radius: float, nb_points: int = 64) -> PackedVector2Array:
+func compute_polygon(radius: float, nb_points: int = 64) -> PackedVector2Array:
 	var points = PackedVector2Array()
 	for i in range(nb_points+1):
 		var point = deg_to_rad(i * 360.0 / nb_points - 90)
@@ -94,15 +94,12 @@ func compute_polygons(radius: float, nb_points: int = 64) -> PackedVector2Array:
 	return points
 	
 func set_uv_from_polygon(polygon_node: Polygon2D = null):
-	var poly = $LevelBGFill
-	if polygon_node:
-		poly = polygon_node
-	var texture = poly.texture
+	var texture = polygon_node.texture
 	if not texture:
 		return
 
 	# Get polygon points
-	var points = poly.polygon
+	var points = polygon_node.polygon
 	if points.size() == 0:
 		return
 	
@@ -128,9 +125,9 @@ func set_uv_from_polygon(polygon_node: Polygon2D = null):
 			normalized.x * texture.get_width(),
 			normalized.y * texture.get_height()
 		))
-	poly.uv = uv
+	polygon_node.uv = uv
 	
-func calculate_polygon_center(polygon_points: PackedVector2Array) -> Vector2:
+func compute_polygon_center(polygon_points: PackedVector2Array) -> Vector2:
 	var center: Vector2 = Vector2.ZERO
 	for p in polygon_points:
 		center += p
