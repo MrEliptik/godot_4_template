@@ -5,7 +5,7 @@ signal killed()
 enum GUN_TYPE {GUN, ROCKET}
 
 @export_category("Movement")
-@export var speed: float = 2.5
+@export var speed: float = 3.5
 @export var jump_force: float = 8.0
 @export var mouse_sensitivity: float = 0.08
 @export var accel: float = 2.0

@@ -25,6 +25,7 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - `exit_game()` → function to exit the game, where you can show a message if needed
 - `has_autoload` ✅
 - `has_autoload_signal` ✅
+- `kill_and_create_tween` ✅
 
 **Transforms, points, area**
 - `get_random_rotation` → you provide the deviation and if you want + - sign ✅

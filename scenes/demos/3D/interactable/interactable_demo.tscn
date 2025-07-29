@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6dlns3dd1ny1"]
+[gd_scene load_steps=19 format=3 uid="uid://c6dlns3dd1ny1"]
 
 [ext_resource type="PackedScene" uid="uid://bw5660x2v75ip" path="res://scenes/character_controller/3D/fps_simple_controller.tscn" id="1_ylnlx"]
 [ext_resource type="Script" uid="uid://b6yyx2wtbd78t" path="res://components/interactable/interactable.gd" id="2_pijpf"]
 [ext_resource type="Material" uid="uid://b4ticegl48jow" path="res://components/interactable/interact_overlay.tres" id="2_xaqar"]
+[ext_resource type="Script" uid="uid://cimae7rkmbu1m" path="res://scenes/demos/3D/interactable/scripts/door.gd" id="3_wejps"]
 [ext_resource type="Script" uid="uid://c06wgt8nxqcyl" path="res://scenes/demos/3D/interactable/scripts/table.gd" id="4_8dkb5"]
 [ext_resource type="Script" uid="uid://c63t318ovt1ku" path="res://components/camera_control/camera_controls.gd" id="5_r7o7r"]
 
@@ -11,13 +12,23 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pijpf"]
 albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wejps"]
+albedo_color = Color(0.429992, 0.424992, 0.437879, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7o7r"]
+size = Vector3(1.50195, 2.33594, 0.355713)
+
 [sub_resource type="BoxMesh" id="BoxMesh_xaqar"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xaqar"]
-size = Vector3(3.2207, 0.303711, 2.26605)
+[sub_resource type="BoxShape3D" id="BoxShape3D_wejps"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4m4ww"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8dkb5"]
 size = Vector3(3, 0.185, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xaqar"]
+size = Vector3(3.2207, 0.303711, 2.26605)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5htqa"]
 sky_top_color = Color(0.276474, 0.696166, 1, 1)
@@ -73,6 +84,35 @@ material_override = SubResource("StandardMaterial3D_pijpf")
 material_overlay = ExtResource("2_xaqar")
 use_collision = true
 
+[node name="Door" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.97777, 1.14014, 0.345069)
+script = ExtResource("3_wejps")
+
+[node name="RotPoint" type="Marker3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0)
+
+[node name="Door" type="CSGBox3D" parent="Door/RotPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+material_override = SubResource("StandardMaterial3D_wejps")
+material_overlay = ExtResource("2_xaqar")
+instance_shader_parameters/amount = 0.0
+instance_shader_parameters/hit_color = Color(1, 1, 1, 0.211765)
+use_collision = true
+size = Vector3(1.5, 2.317, 0.25)
+
+[node name="Interactable" type="Area3D" parent="Door/RotPoint" node_paths=PackedStringArray("target_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_pijpf")
+message = "Press {key} to do open"
+target_mesh = NodePath("../Door")
+interact_overlay_color = Color(1, 1, 1, 0.211765)
+metadata/_custom_type_script = "uid://b6yyx2wtbd78t"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/RotPoint/Interactable"]
+shape = SubResource("BoxShape3D_r7o7r")
+
 [node name="InteractableTest" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68602, 0.502983, -2.90387)
 material_overlay = ExtResource("2_xaqar")
@@ -87,7 +127,23 @@ target_mesh = NodePath("..")
 interact_overlay_color = Color(0, 0.7, 1, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/Interactable"]
-shape = SubResource("BoxShape3D_xaqar")
+shape = SubResource("BoxShape3D_wejps")
+
+[node name="InteractableTest2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59741, 0.502983, -4.69169)
+material_overlay = ExtResource("2_xaqar")
+instance_shader_parameters/hit_color = Color(0, 0.7, 1, 1)
+mesh = SubResource("BoxMesh_xaqar")
+
+[node name="Interactable" type="Area3D" parent="InteractableTest2" node_paths=PackedStringArray("target_mesh")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_pijpf")
+target_mesh = NodePath("..")
+interact_overlay_color = Color(0, 0.7, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest2/Interactable"]
+shape = SubResource("BoxShape3D_4m4ww")
 
 [node name="Table" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.82904, 0.579013, 0.906899)
@@ -118,4 +174,5 @@ environment = SubResource("Environment_ylnlx")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.952001, -0.180764, 0.247018, 0, 0.807002, 0.590549, -0.306094, -0.562204, 0.768266, 0, 3.43693, 0)
 
+[connection signal="interacted" from="Door/RotPoint/Interactable" to="Door" method="_on_interactable_interacted"]
 [connection signal="interacted" from="Table/Interactable" to="Table" method="_on_interactable_interacted"]
