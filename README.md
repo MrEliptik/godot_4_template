@@ -13,9 +13,10 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - Auto resize text label ⌛
 
 **3D**
-- FPS controller
+- Simple FPS controller ✅
+- Movement FPS controller ⌛
 - Camera takeover
-- Interaction system
+- Interaction system ✅
 
 **2D**
 
