@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjrtrx3rdksl5" path="res://autoload/audio_manager/scripts/audio_manager.gd" id="1_418ss"]
 
-[node name="AudioManager" type="Node2D"]
+[node name="AudioManager" type="Node"]
 script = ExtResource("1_418ss")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
