@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3 uid="uid://bw5660x2v75ip"]
+
+[ext_resource type="Script" uid="uid://ech8uqej60bq" path="res://scenes/character_controller/3D/scripts/fps_simple_controller.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://ih0cxl1ibl02" path="res://components/interactor/interactor_raycast.gd" id="2_73rg6"]
+[ext_resource type="Script" uid="uid://cpymf885xcle" path="res://components/interactor/interactor_area.gd" id="3_tgehe"]
+[ext_resource type="Script" uid="uid://poq67n5cy24o" path="res://components/interact_label/interact_label.gd" id="4_ar34k"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_75vfm"]
+size = Vector3(1.125, 1.9707, 1.14844)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tgehe"]
+size = Vector3(1, 2.28247, 2.617)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gmlin"]
+random_pitch = 1.1
+streams_count = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dovo2"]
+random_pitch = 1.05
+random_volume_offset_db = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ar34k"]
+font_size = 26
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="FPSSimpleController" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_x7p2l")
+
+[node name="PlayerArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea"]
+shape = SubResource("BoxShape3D_75vfm")
+
+[node name="RotPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="Camera3D" type="Camera3D" parent="RotPoint"]
+current = true
+
+[node name="InteractorRaycast" type="RayCast3D" parent="RotPoint"]
+enabled = false
+target_position = Vector3(0, 0, -8)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(0, 0.54902, 0.129412, 1)
+debug_shape_thickness = 4
+script = ExtResource("2_73rg6")
+
+[node name="InteractorArea" type="Area3D" parent="RotPoint"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_tgehe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotPoint/InteractorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.752808, -1.43826)
+shape = SubResource("BoxShape3D_tgehe")
+
+[node name="Land" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_gmlin")
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_dovo2")
+volume_db = -5.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="InteractLabel" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TEST"
+label_settings = SubResource("LabelSettings_ar34k")
+script = ExtResource("4_ar34k")

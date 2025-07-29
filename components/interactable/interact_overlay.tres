@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b4ticegl48jow"]
+
+[ext_resource type="Shader" uid="uid://xumne17raw4f" path="res://shared/shaders/hit_flash.gdshader" id="1_bxgeh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bxgeh")

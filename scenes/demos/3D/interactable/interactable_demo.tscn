@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6dlns3dd1ny1"]
+
+[ext_resource type="PackedScene" uid="uid://bw5660x2v75ip" path="res://scenes/character_controller/3D/fps_simple_controller.tscn" id="1_ylnlx"]
+[ext_resource type="Script" uid="uid://b6yyx2wtbd78t" path="res://components/interactable/interactable.gd" id="2_pijpf"]
+[ext_resource type="Material" uid="uid://b4ticegl48jow" path="res://components/interactable/interact_overlay.tres" id="2_xaqar"]
+[ext_resource type="Script" uid="uid://c06wgt8nxqcyl" path="res://scenes/demos/3D/interactable/scripts/table.gd" id="4_8dkb5"]
+[ext_resource type="Script" uid="uid://c63t318ovt1ku" path="res://components/camera_control/camera_controls.gd" id="5_r7o7r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylnlx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pijpf"]
+albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xaqar"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xaqar"]
+size = Vector3(3.2207, 0.303711, 2.26605)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8dkb5"]
+size = Vector3(3, 0.185, 2)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5htqa"]
+sky_top_color = Color(0.276474, 0.696166, 1, 1)
+sky_horizon_color = Color(0.956895, 0.971439, 0.985934, 1)
+ground_bottom_color = Color(0.900608, 0.641436, 0.870203, 1)
+ground_horizon_color = Color(0.950945, 0.916161, 0.963819, 1)
+
+[sub_resource type="Sky" id="Sky_5htqa"]
+sky_material = SubResource("ProceduralSkyMaterial_5htqa")
+
+[sub_resource type="Environment" id="Environment_ylnlx"]
+background_mode = 2
+sky = SubResource("Sky_5htqa")
+ambient_light_source = 3
+
+[node name="InteractableDemo" type="Node3D"]
+
+[node name="FPSSimpleController" parent="." instance=ExtResource("1_ylnlx")]
+transform = Transform3D(0.559338, 0, 0.82894, 0, 1, 0, -0.82894, 0, 0.559338, 0, 0.87968, 0)
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.259277, 0)
+material_override = SubResource("StandardMaterial3D_ylnlx")
+use_collision = true
+size = Vector3(25.1621, 0.481445, 22.251)
+
+[node name="Obstacle" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6631, 0.981446, 0)
+material_override = SubResource("StandardMaterial3D_pijpf")
+use_collision = true
+size = Vector3(3, 2, 5)
+
+[node name="Obstacle2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.27018, 0.981446, -4.64757)
+material_override = SubResource("StandardMaterial3D_pijpf")
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="Obstacle3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1475, 0.481446, -6.15338)
+material_override = SubResource("StandardMaterial3D_pijpf")
+use_collision = true
+
+[node name="Obstacle4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.95593, 0.981446, 6.94857)
+material_override = SubResource("StandardMaterial3D_pijpf")
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="Obstacle5" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.46175, 0.481446, 3.82589)
+material_override = SubResource("StandardMaterial3D_pijpf")
+material_overlay = ExtResource("2_xaqar")
+use_collision = true
+
+[node name="InteractableTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68602, 0.502983, -2.90387)
+material_overlay = ExtResource("2_xaqar")
+instance_shader_parameters/hit_color = Color(0, 0.7, 1, 1)
+mesh = SubResource("BoxMesh_xaqar")
+
+[node name="Interactable" type="Area3D" parent="InteractableTest" node_paths=PackedStringArray("target_mesh")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_pijpf")
+target_mesh = NodePath("..")
+interact_overlay_color = Color(0, 0.7, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/Interactable"]
+shape = SubResource("BoxShape3D_xaqar")
+
+[node name="Table" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.82904, 0.579013, 0.906899)
+material_overlay = ExtResource("2_xaqar")
+instance_shader_parameters/hit_color = Color(0, 0.7, 1, 1)
+mesh = SubResource("BoxMesh_8dkb5")
+script = ExtResource("4_8dkb5")
+
+[node name="Interactable" type="Area3D" parent="Table" node_paths=PackedStringArray("target_mesh")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_pijpf")
+message = "Press {key} to sit"
+target_mesh = NodePath("..")
+interact_overlay_color = Color(0, 0.7, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0, 0.00161743)
+shape = SubResource("BoxShape3D_xaqar")
+
+[node name="Camera3D" type="Camera3D" parent="Table"]
+transform = Transform3D(1, 1.34604e-08, 2.12409e-09, -1.34604e-08, 0.951406, 0.307938, 2.12409e-09, -0.307938, 0.951406, -2.38419e-07, 0.874009, 1.79651)
+script = ExtResource("5_r7o7r")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ylnlx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.952001, -0.180764, 0.247018, 0, 0.807002, 0.590549, -0.306094, -0.562204, 0.768266, 0, 3.43693, 0)
+
+[connection signal="interacted" from="Table/Interactable" to="Table" method="_on_interactable_interacted"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://x3rnv27gddqy"]
+
+[ext_resource type="Script" uid="uid://s0l660kbyq5e" path="res://scenes/demos/3D/low_res/scripts/low_res_demo.gd" id="1_1d0k2"]
+[ext_resource type="PackedScene" uid="uid://cj6m7clncmn8" path="res://scenes/demos/3D/fps_simple/fps_simple_demo.tscn" id="1_2ampm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ampm"]
+font_size = 36
+
+[node name="LowResDemo" type="Node"]
+script = ExtResource("1_1d0k2")
+
+[node name="LowRes" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="LowRes"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="LowRes/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="FPSSimpleDemo" parent="LowRes/SubViewportContainer/SubViewport" instance=ExtResource("1_2ampm")]
+
+[node name="HighRes" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HighRes"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HighRes/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -318.5
+offset_top = 29.0
+offset_right = 318.5
+offset_bottom = 79.0
+grow_horizontal = 2
+text = "This is clear text that is not pixelated"
+label_settings = SubResource("LabelSettings_2ampm")
+horizontal_alignment = 1
+vertical_alignment = 1

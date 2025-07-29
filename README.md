@@ -23,6 +23,8 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 
 **Game**
 - `exit_game()` → function to exit the game, where you can show a message if needed
+- `has_autoload`
+- `has_autoload_signal`
 
 **Transforms, points, area**
 - `get_random_rotation` → you provide the deviation and if you want + - sign ✅
@@ -39,6 +41,7 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - `compute_polygon` ✅
 - `set_uv_from_polygon` ✅
 - `compute_polygon_center` ✅
+- `compute_polygon_area` ⌛
 - `get_random_points_inside_polygon` ⌛
 - `get_distributed_points_inside_polygon` ⌛
 
@@ -77,6 +80,6 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - Hitbox/hurtbox ⌛
 - Hitstop ⌛
 - Bullet time ⌛
-- Interactable ⌛
+- Interactable ✅
 - Spawner ✅
 - Tween that sets default value automatically for UI ⌛ 

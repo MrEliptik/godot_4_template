@@ -1,0 +1,1 @@
+class_name CameraControls extends Camera3D
