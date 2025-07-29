@@ -5,6 +5,12 @@ func exit_game() -> void:
 	# Here you can show a confirmation or a message: demo, playtest, etc..
 	get_tree().quit()
 
+func has_autoload(autoload: String) -> bool:
+	return is_inside_tree() and get_tree() != null and get_tree().root.has_node(autoload)
+		
+func has_autoload_signal(autoload: String, signal_name: String) -> bool:
+	return is_inside_tree() and get_tree() != null and get_tree().root.has_node(autoload) and SignalBus.has_signal(signal_name)
+
 #endregion
 
 #region TRANSFORMS, POINTS, AREAS, ETC..
