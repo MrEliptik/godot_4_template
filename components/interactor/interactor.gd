@@ -7,6 +7,10 @@ var interactable_active: Interactable = null
 func _ready() -> void:
 	pass
 
+func interact() -> void:
+	if is_instance_valid(interactable_active):
+		interactable_active.interact()
+
 func update_text() -> void:
 	var msg: String = ""
 	if is_instance_valid(interactable_active):
