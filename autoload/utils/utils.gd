@@ -11,6 +11,11 @@ func has_autoload(autoload: String) -> bool:
 func has_autoload_signal(autoload: String, signal_name: String) -> bool:
 	return is_inside_tree() and get_tree() != null and get_tree().root.has_node(autoload) and SignalBus.has_signal(signal_name)
 
+func kill_and_create_tween(tween: Tween = null) -> Tween:
+	if tween and tween.is_running():
+		tween.kill()
+	return create_tween()
+
 #endregion
 
 #region TRANSFORMS, POINTS, AREAS, ETC..
