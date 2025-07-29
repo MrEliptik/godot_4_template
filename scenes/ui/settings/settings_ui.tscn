@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://pgqdboytwk1b"]
+[gd_scene load_steps=12 format=3 uid="uid://pgqdboytwk1b"]
 
 [ext_resource type="Script" uid="uid://20n2essy7t3a" path="res://scenes/ui/settings/scripts/settings_ui.gd" id="1_6oxt2"]
 [ext_resource type="LabelSettings" uid="uid://dfumhw8prrqif" path="res://shared/fonts/label_82.tres" id="2_6xy4m"]
 [ext_resource type="PackedScene" uid="uid://dkx0tjw21t4ql" path="res://scenes/ui/buttons/button_standard.tscn" id="3_dmrhn"]
+[ext_resource type="Script" uid="uid://cgbelueck1fvl" path="res://scenes/ui/settings/scripts/language.gd" id="3_ebhoy"]
 [ext_resource type="LabelSettings" uid="uid://cpc02d4oge46v" path="res://shared/fonts/label_26.tres" id="3_ejmdu"]
+[ext_resource type="Script" uid="uid://di0wcimwgk6a0" path="res://scenes/ui/settings/scripts/volume.gd" id="4_ojufi"]
+[ext_resource type="Script" uid="uid://n0tnkiuinkdt" path="res://scenes/ui/settings/scripts/screenshake.gd" id="5_6ixfs"]
+[ext_resource type="Script" uid="uid://ddbbwty5vffrf" path="res://scenes/ui/settings/scripts/window_type.gd" id="5_pdude"]
+[ext_resource type="Script" uid="uid://hv8amvaeve5k" path="res://scenes/ui/settings/scripts/monitor.gd" id="6_1qmnq"]
+[ext_resource type="Script" uid="uid://bd8j43ajd4638" path="res://scenes/ui/settings/scripts/vibration.gd" id="6_sx61c"]
+[ext_resource type="Script" uid="uid://wi6ibqmjrkgo" path="res://scenes/ui/settings/scripts/vsync.gd" id="7_j7mfc"]
 
 [node name="SettingsUI" type="Control"]
 process_mode = 3
@@ -44,16 +51,17 @@ offset_bottom = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings"]
+[node name="Language" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
+script = ExtResource("3_ebhoy")
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer"]
+[node name="Label" type="Label" parent="Settings/Language"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "LANGUAGE"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="Settings/Language"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -63,44 +71,47 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Settings"]
+[node name="WindowType" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
+script = ExtResource("5_pdude")
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer2"]
+[node name="Label" type="Label" parent="Settings/WindowType"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "WINDOW"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer2"]
+[node name="OptionButton" type="OptionButton" parent="Settings/WindowType"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Settings"]
+[node name="Monitor" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
+script = ExtResource("6_1qmnq")
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer3"]
+[node name="Label" type="Label" parent="Settings/Monitor"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "MONITOR"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer3"]
+[node name="OptionButton" type="OptionButton" parent="Settings/Monitor"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Settings"]
+[node name="Vsync" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
+script = ExtResource("7_j7mfc")
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer4"]
+[node name="Label" type="Label" parent="Settings/Vsync"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "VSYNC"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="OptionButton" type="OptionButton" parent="Settings/HBoxContainer4"]
+[node name="OptionButton" type="OptionButton" parent="Settings/Vsync"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -110,69 +121,145 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Settings"]
+[node name="MasterVolume" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
+script = ExtResource("4_ojufi")
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer5"]
+[node name="Label" type="Label" parent="Settings/MasterVolume"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "GENERAL"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer5"]
+[node name="HSlider" type="HSlider" parent="Settings/MasterVolume"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
 
-[node name="Value" type="Label" parent="Settings/HBoxContainer5"]
+[node name="Value" type="Label" parent="Settings/MasterVolume"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "100"
 label_settings = ExtResource("3_ejmdu")
 horizontal_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="Settings/HBoxContainer5"]
+[node name="MuteBtn" type="CheckButton" parent="Settings/MasterVolume"]
 layout_mode = 2
+button_pressed = true
+
+[node name="MusicVolume" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+script = ExtResource("4_ojufi")
+bus = 1
+
+[node name="Label" type="Label" parent="Settings/MusicVolume"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "MUSIC"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="HSlider" type="HSlider" parent="Settings/MusicVolume"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+
+[node name="Value" type="Label" parent="Settings/MusicVolume"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("3_ejmdu")
+horizontal_alignment = 1
+
+[node name="MuteBtn" type="CheckButton" parent="Settings/MusicVolume"]
+layout_mode = 2
+button_pressed = true
+
+[node name="EffectsVolume" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+script = ExtResource("4_ojufi")
+bus = 2
+
+[node name="Label" type="Label" parent="Settings/EffectsVolume"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "EFFECTS"
+label_settings = ExtResource("3_ejmdu")
+
+[node name="HSlider" type="HSlider" parent="Settings/EffectsVolume"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+
+[node name="Value" type="Label" parent="Settings/EffectsVolume"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("3_ejmdu")
+horizontal_alignment = 1
+
+[node name="MuteBtn" type="CheckButton" parent="Settings/EffectsVolume"]
+layout_mode = 2
+button_pressed = true
 
 [node name="VSeparator3" type="VSeparator" parent="Settings"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Settings"]
+[node name="Screenshake" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
+script = ExtResource("5_6ixfs")
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer6"]
+[node name="Label" type="Label" parent="Settings/Screenshake"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "SCREENSHAKE"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer6"]
+[node name="HSlider" type="HSlider" parent="Settings/Screenshake"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
+max_value = 2.0
 tick_count = 3
 ticks_on_borders = true
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="Settings"]
+[node name="Value" type="Label" parent="Settings/Screenshake"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+text = "Normal"
+label_settings = ExtResource("3_ejmdu")
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer7"]
+[node name="Vibration" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+script = ExtResource("6_sx61c")
+
+[node name="Label" type="Label" parent="Settings/Vibration"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "GAMEPAD VIBRATION"
 label_settings = ExtResource("3_ejmdu")
 
-[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer7"]
+[node name="HSlider" type="HSlider" parent="Settings/Vibration"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
+max_value = 2.0
 tick_count = 3
 ticks_on_borders = true
+
+[node name="Value" type="Label" parent="Settings/Vibration"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Normal"
+label_settings = ExtResource("3_ejmdu")
+horizontal_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -190,4 +277,19 @@ theme_override_constants/separation = 10
 layout_mode = 2
 text = "HOME"
 
+[connection signal="item_focused" from="Settings/Language/OptionButton" to="Settings/Language" method="_on_option_button_item_focused"]
+[connection signal="item_selected" from="Settings/Language/OptionButton" to="Settings/Language" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Settings/WindowType/OptionButton" to="Settings/WindowType" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Settings/Monitor/OptionButton" to="Settings/Monitor" method="_on_option_button_item_selected"]
+[connection signal="drag_ended" from="Settings/MasterVolume/HSlider" to="Settings/MasterVolume" method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/MasterVolume/HSlider" to="Settings/MasterVolume" method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="Settings/MasterVolume/MuteBtn" to="Settings/MasterVolume" method="_on_mute_btn_toggled"]
+[connection signal="drag_ended" from="Settings/MusicVolume/HSlider" to="Settings/MusicVolume" method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/MusicVolume/HSlider" to="Settings/MusicVolume" method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="Settings/MusicVolume/MuteBtn" to="Settings/MusicVolume" method="_on_mute_btn_toggled"]
+[connection signal="drag_ended" from="Settings/EffectsVolume/HSlider" to="Settings/EffectsVolume" method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/EffectsVolume/HSlider" to="Settings/EffectsVolume" method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="Settings/EffectsVolume/MuteBtn" to="Settings/EffectsVolume" method="_on_mute_btn_toggled"]
+[connection signal="value_changed" from="Settings/Screenshake/HSlider" to="Settings/Screenshake" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="Settings/Vibration/HSlider" to="Settings/Vibration" method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="Buttons/BtnHome" to="." method="_on_btn_home_pressed"]
