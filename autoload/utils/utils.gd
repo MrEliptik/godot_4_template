@@ -160,9 +160,10 @@ func get_distributed_points_inside_polygon(polygon_points: PackedVector2Array) -
 #endregion
 
 #region CALLING FUNCTIONS
-# TODO: finish
 func call_function_in_frames(function: Callable, frames: int) -> void:
-	pass
+	for i in range(frames):
+		await get_tree().physics_frame
+	function.call()
 
 func call_function_later(function: Callable, time: float) -> void:
 	await get_tree().create_timer(time, false).timeout

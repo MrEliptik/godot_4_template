@@ -48,7 +48,7 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - `get_distributed_points_inside_polygon` ⌛
 
 **Calling functions**
-- `call_function_in_frames` ⌛
+- `call_function_in_frames` ✅
 - `call_function_later` ✅
 
 **Editor**
