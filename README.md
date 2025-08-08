@@ -84,4 +84,5 @@ This is my personal Godot 4 template to make quick prototype, game jams and quic
 - Bullet time ⌛
 - Interactable ✅
 - Spawner ✅
+- Self freeing particles ✅
 - Tween that sets default value automatically for UI ⌛ 
